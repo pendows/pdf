@@ -24,12 +24,11 @@
 
 	<script type="text/javascript" src="/static/js/index.js"></script>
 	<script type="text/javascript">
-		var fileId = [[${fileId}]];
 		$(function ()
 		{
-			
 			if (isMobile())
 			{
+
 				$("#iframeofall").css("width", "100%");
 			}
 			if (null != document.getElementById("imgObj") && '' != document.getElementById("imgObj"))
@@ -37,8 +36,8 @@
 				document.getElementById("imgObj").src = "/etax/DrawImage?random=" + Math.random();
 			}
 		})
-		
 		function btn_tj() {
+			var fileId = [[${fileId}]];
 			PDFObject.embed("/generateQR?fileId="+fileId, "#pdf");
 		}
 
