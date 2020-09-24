@@ -1,0 +1,41 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/fallenfairy?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+    username: root
+    password: pwd091214
+    type: com.alibaba.druid.pool.DruidDataSource
+  profiles:
+    active: dev
+  mvc:
+    view:
+      prefix: /
+      suffix: .html
+  thymeleaf:
+    mode: HTML5
+    suffix: .html
+    prefix: classpath:/templates/
+    encoding: UTF-8
+    content-type: text/html
+    cache: false
+  servlet:
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 600MB
+youku1327:
+    file:
+      root:
+        path: "D:\\"
+
+resources:
+  static-locations: classpath:/resources/,classpath:/static/,classpath:/templates/
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.pdf.dao
+
+server:
+  port: 80
+  servlet:
+    context-path:
