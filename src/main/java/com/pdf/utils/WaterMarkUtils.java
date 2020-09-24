@@ -16,13 +16,9 @@ import com.itextpdf.text.pdf.*;
  */
 public class WaterMarkUtils {
 
-    public static void setWatermark(BufferedOutputStream bos, String filePath,  Long id )
+    public static void setWatermark(BufferedOutputStream bos,  byte[] pdfBytes,  Long id )
             throws  IOException, DocumentException {
-        FileInputStream in = null;
         try{
-            in =new FileInputStream(filePath);
-            byte[] pdfBytes = new byte[in.available()];
-            in.read(pdfBytes);
             PdfReader reader = new PdfReader(pdfBytes);
             PdfStamper stamper = new PdfStamper(reader, bos);
             int total = reader.getNumberOfPages() + 1;
@@ -75,14 +71,14 @@ public class WaterMarkUtils {
             System.out.println("PDF加图片水印>> ok 所用时间:[{}]"+(endTime-startTime)+"s");
             stamper.close();
             reader.close();
-        }finally{
-            in.close();
+        }finally {
+
         }
     }
 
     public static void main(String[] args) throws IOException, DocumentException {
         BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream("D:\\ticket_out1.pdf"));
-        WaterMarkUtils.setWatermark(bos,"D:\\ticket_out.pdf",0L);
+        WaterMarkUtils.setWatermark(bos,null,0L);
     }
 }
 

@@ -44,7 +44,7 @@ public class pdfController {
 
 
     @RequestMapping("/generateQR")
-    public void generateQR(FileContent fileContent, HttpServletResponse response) throws IOException {
+    public void generateQR(@RequestParam(required = false) FileContent fileContent, HttpServletResponse response) throws IOException {
         FileInputStream in = null;
         try{
             in =new FileInputStream("D:\\广弘食品2020.pdf");

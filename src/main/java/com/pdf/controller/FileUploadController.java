@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.thymeleaf.exceptions.TemplateInputException;
 
 import java.io.*;
 import java.util.Date;
@@ -27,25 +28,27 @@ public class FileUploadController {
         // 多文件上传
         for (MultipartFile file : files){
             try {
+                FileContent fileContent = new FileContent();
                 // 上传简单文件名
                 String originalFilename = file.getOriginalFilename();
-                // 存储路径
-                filePath = new StringBuilder(fileRootPath).append(this.getFileName(originalFilename)).toString();
-                file.transferTo(new File(filePath));
-                Map<String, String> result = PDFUtil.readPdf(filePath);
-                FileContent fileContent = new FileContent();
                 SnowflakeIdWorker idWorker = new SnowflakeIdWorker(0, 0);
                 fileContent.setId(idWorker.nextId());
-                fileContent.setFileDate(result.get("fileDate"));
+                byte[] bytes = file.getBytes();
+                // 存储路径
+                filePath = new StringBuilder(fileRootPath).append(this.getFileName(originalFilename)).toString();
+                BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(filePath));
+                WaterMarkUtils.setWatermark(bos,bytes,fileContent.getId());
+                //file.transferTo(new File(filePath));
+                Map<String, String> result = PDFUtil.readPdf(filePath);
+
                 fileContent.setFileName(originalFilename);
                 fileContent.setPath(filePath);
                 fileContent.setFileNo(result.get("fileNo"));
                 fileContent.setFileAmout(result.get("fileAmout"));
                 fileContent.setFileCapitalize(result.get("fileCapitalize"));
                 pdfSeervice.saveFileInfo(fileContent);
-                BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(filePath));
-                WaterMarkUtils.setWatermark(bos,filePath,fileContent.getId());
-            } catch (Exception e) {
+            } catch (TemplateInputException e) {
+            }catch (Exception e){
                 e.printStackTrace();
             }
         }
