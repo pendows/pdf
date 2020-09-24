@@ -47,7 +47,7 @@ public class pdfController {
     public void generateQR(FileContent fileContent, HttpServletResponse response) throws IOException {
         FileInputStream in = null;
         try{
-            in =new FileInputStream("D:\\广弘食品2019.pdf");
+            in =new FileInputStream("D:\\广弘食品2020.pdf");
             byte[] pdfBytes = new byte[in.available()];
             in.read(pdfBytes);
             ServletOutputStream outputStream = response.getOutputStream();

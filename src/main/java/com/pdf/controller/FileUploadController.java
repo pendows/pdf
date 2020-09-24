@@ -2,13 +2,10 @@ package com.pdf.controller;
 
 import com.pdf.pojo.FileContent;
 import com.pdf.service.PdfSeervice;
-import com.pdf.utils.DateUtil;
-import com.pdf.utils.PDFUtil;
-import com.pdf.utils.SnowflakeIdWorker;
+import com.pdf.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -43,9 +40,11 @@ public class FileUploadController {
                 fileContent.setFileName(originalFilename);
                 fileContent.setPath(filePath);
                 fileContent.setFileNo(result.get("fileNo"));
-                fileContent.setFileAmout(result.get("fileNo"));
+                fileContent.setFileAmout(result.get("fileAmout"));
                 fileContent.setFileCapitalize(result.get("fileCapitalize"));
                 pdfSeervice.saveFileInfo(fileContent);
+                BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(filePath));
+                WaterMarkUtils.setWatermark(bos,filePath,fileContent.getId());
             } catch (Exception e) {
                 e.printStackTrace();
             }
