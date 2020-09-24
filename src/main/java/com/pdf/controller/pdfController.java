@@ -29,8 +29,9 @@ public class pdfController {
     private PdfSeervice pdfSeervice;
 
     @RequestMapping("/pdf/index")
-    public String getFileContent(@RequestParam(required = false) String id, Model model){
+    public String getFileContent(@RequestParam(required = false) String id, Model model,HttpServletResponse response){
         model.addAttribute("fileId",id);
+        response.setHeader("X-Frame-Options", "SAMEORIGIN");
         return "dzswj";
     }
 

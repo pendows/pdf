@@ -33,8 +33,8 @@ public class FileUploadController {
                 // 上传简单文件名
                 String originalFilename = file.getOriginalFilename();
                 // 存储路径
-                file.transferTo(new File(filePath));
                 filePath = new StringBuilder(fileRootPath).append(this.getFileName(originalFilename)).toString();
+                file.transferTo(new File(filePath));
                 Map<String, String> result = PDFUtil.readPdf(filePath);
                 FileContent fileContent = new FileContent();
                 SnowflakeIdWorker idWorker = new SnowflakeIdWorker(0, 0);

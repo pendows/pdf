@@ -25,11 +25,7 @@
     window.onload = function() {
         document.getElementById("spzb1").focus();
     }
-
-	var fileId = [[${fileId}]];
-	console.log(fileId)
-
-	$.ajax({
+	/*$.ajax({
 		type: "POST",
 		url: "/pdf/getFileContent",
 		data: {id:fileId},
@@ -44,7 +40,7 @@
 				$("#tfrq").var(data.fileDate);
 			}
 		}
-	});
+	});*/
 
     /* 提交查验前校验参数 */
     var isSubmiting = false;
