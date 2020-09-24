@@ -35,6 +35,9 @@ public class PDFUtil {
         Map<String,String> map = new HashMap<>();
         String pageContent = "";
         try {
+            PdfReplacer textReplacer = new PdfReplacer(fileName);
+            //textReplacer.replaceText("1638.97", "     1638");
+            textReplacer.replaceText(55,710,70,70,"");
             PdfReader reader = new PdfReader(fileName);
             int pageNum = reader.getNumberOfPages();
             for (int i = 1; i <= pageNum; i++) {
