@@ -37,7 +37,7 @@ public class pdfController {
 
     @RequestMapping("/pdf/getFileContent")
     @ResponseBody
-    public FileContent getFileContent(@RequestBody FileContent fileContent){
+    public FileContent getFileContent(@RequestBody FileContent fileContent) throws Exception {
         fileContent = pdfSeervice.getFileContent(fileContent);
         return fileContent;
     }

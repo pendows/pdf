@@ -13,10 +13,10 @@ public interface PdfDao {
             "(`ID`, `FILE_NAME`, `FILE_PATH`, `FILE_DATE`, `FILE_TICKET_TAX_NO`, `FILE_AMOUT`, `FILE_AMOUNT_CAPITALIZE`, " +
             "`FILE_REMARK`, `FILE_TICKET_TAX_CODE`, `FILE_TICKET_TAX_TYPE`) " +
             "VALUES (#{id}, #{fileName}, #{path}, #{fileDate}, #{fileNo}, #{fileAmout}, #{fileCapitalize}, #{remark}, null, null);"})
-    void saveFileInfo(FileContent fileContent);
+    void saveFileInfo(FileContent fileContent) throws Exception;
 
     @Select({"select ID as id,FILE_NAME as fileName,FILE_AMOUNT_CAPITALIZE as fileCapitalize," +
             "FILE_AMOUT as fileAmout,FILE_DATE as fileDate,FILE_PATH as path,FILE_TICKET_TAX_NO as fileNo " +
             "from pdf_infomation where ID = #{id}"})
-    FileContent getFileContent(FileContent fileContent);
+    FileContent getFileContent(FileContent fileContent) throws Exception;
 }

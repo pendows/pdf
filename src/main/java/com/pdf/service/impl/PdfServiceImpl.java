@@ -17,7 +17,7 @@ public class PdfServiceImpl implements PdfSeervice {
     }
 
     @Override
-    public FileContent getFileContent(FileContent fileContent) {
+    public FileContent getFileContent(FileContent fileContent) throws Exception {
         return pdfDao.getFileContent(fileContent);
     }
 }

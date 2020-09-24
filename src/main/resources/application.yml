@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/fallenfairy?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+    url: jdbc:mysql://127.0.0.1:3306/pdf_exchange?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
     username: root
     password: pwd091214
     type: com.alibaba.druid.pool.DruidDataSource
