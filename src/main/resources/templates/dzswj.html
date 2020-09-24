@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0169)https://bdyw.guangdong.chinatax.gov.cn/etax/dzsp/dzspdy/dzspCyInit.do?spzb=20%EF%BC%880831%EF%BC%8944%E8%AF%81%E6%98%8E&spbh=60010316&tfrq=2020-08-31&hjje=2024.12&pzzl=2 -->
-<html>
+<html id="pdf" style="height: 800px;overflow: hidden;">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -17,7 +16,7 @@
 	<script type="text/javascript" src="/static/skin/common/script/message/Message.js"></script>
 	<script type="text/javascript" src="/static/skin/common/script/jquery/jquery.blockUI.js"></script>
 	<script type="text/javascript" src="/static/skin/script/common/asyncontrol.js"></script>
-
+	<script type="text/javascript" src="/static/js/pdfobject.js"></script>
 	<script type="text/javascript" src="/static/skin/script/common/My97DatePicker/WdatePicker.js"></script>
 	<link href="/static/skin/script/common/My97DatePicker/skin/WdatePicker.css" rel="stylesheet" type="text/css">
 
@@ -25,6 +24,7 @@
 	<script type="text/javascript">
 		$(function ()
 		{
+			
 			if (isMobile())
 			{
 				$("#iframeofall").css("width", "100%");
@@ -34,6 +34,10 @@
 				document.getElementById("imgObj").src = "/etax/DrawImage?random=" + Math.random();
 			}
 		})
+		
+		function btn_tj() {
+			PDFObject.embed("/generateQR", "#pdf");
+		}
 
 	</script>
 
@@ -41,7 +45,7 @@
 <body>
 
 <form name="formCy" id="formCy" method="get">
-	<div style="text-align:center">
+	<div style="text-align:center;">
 		<div class="div-gdsite-01-iframe-01" id="iframeofall">
 			<h1>广东省电子税务局&gt;&gt;电子税票查验</h1>
 			<table width="100%" border="0" cellspacing="1" cellpadding="0">
@@ -114,7 +118,7 @@
 					<td colspan="1" align="center">
 						<span class="font02" onclick="btn_tj()" style="cursor:pointer;">查验 </span>
 					</td>
-					<td colspan="1" style="color:red;font-size: 14px;padding-left:10px;padding-top:10px;" align="left">
+					<td colspan="1" style="color:red;fonbtn_tjt-size: 14px;padding-left:10px;padding-top:10px;" align="left">
 						请确认查验网站为http://www.gd-n-tax.gov.cn并核对票面信息后查验
 					</td>
 				</tr>

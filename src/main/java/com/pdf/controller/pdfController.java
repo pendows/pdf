@@ -50,6 +50,7 @@ public class pdfController {
             in =new FileInputStream("D:\\广弘食品2020.pdf");
             byte[] pdfBytes = new byte[in.available()];
             in.read(pdfBytes);
+            response.setContentType("application/pdf");
             ServletOutputStream outputStream = response.getOutputStream();
             outputStream.write(pdfBytes);
             outputStream.flush();
