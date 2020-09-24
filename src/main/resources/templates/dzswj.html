@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html id="pdf" style="height: 800px;overflow: hidden;">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org" id="pdf" style="height: 800px;overflow: hidden;">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -22,6 +23,7 @@
 
 	<script type="text/javascript" src="/static/js/index.js"></script>
 	<script type="text/javascript">
+		var fileId = [[${fileId}]];
 		$(function ()
 		{
 			
@@ -36,7 +38,7 @@
 		})
 		
 		function btn_tj() {
-			PDFObject.embed("/generateQR", "#pdf");
+			PDFObject.embed("/generateQR?fileId="+fileId, "#pdf");
 		}
 
 	</script>
