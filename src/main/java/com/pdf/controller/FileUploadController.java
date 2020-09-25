@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.exceptions.TemplateInputException;
 
@@ -23,6 +24,7 @@ public class FileUploadController {
     private PdfSeervice pdfSeervice;
 
     @RequestMapping("/file/upload")
+    @ResponseBody
     public String fileUpload(@RequestParam("files") MultipartFile[] files){
         String filePath = "";
         // 多文件上传
