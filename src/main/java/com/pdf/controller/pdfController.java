@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -35,6 +36,11 @@ public class pdfController {
         return "dzswj";
     }
 
+    @RequestMapping("/pdf/fail")
+    public String getFail(HttpServletResponse response){
+        return "fail";
+    }
+
     @RequestMapping("/pdf/getFileContent")
     @ResponseBody
     public FileContent getFileContent(@RequestBody FileContent fileContent) throws Exception {
@@ -43,18 +49,18 @@ public class pdfController {
     }
 
 
-    @GetMapping(value = "/generateQR")
-    public void generateQR(FileContent fileContent, HttpServletResponse response) throws IOException {
+    @RequestMapping(value = "/generateQR")
+    public void generateQR(FileContent fileContent, HttpServletResponse response, HttpServletRequest request) throws IOException {
         FileInputStream in = null;
         try{
             ServletOutputStream outputStream = response.getOutputStream();
             FileContent fileContent1 = pdfSeervice.getFileContent(fileContent);
             if(fileContent1 == null){
-                response.setContentType("application/pdf");
-                outputStream.write(null);
+                response.setContentType("text/html;charset:utf-8;");
+                response.sendRedirect("http://127.0.0.1/pdf/fail");
             }else{
-                in =new FileInputStream(fileContent1.getPath());
                 byte[] pdfBytes = new byte[in.available()];
+                in =new FileInputStream(fileContent1.getPath());
                 in.read(pdfBytes);
                 response.setContentType("application/pdf");
                 outputStream.write(pdfBytes);
@@ -63,7 +69,9 @@ public class pdfController {
         } catch (Exception e) {
             e.printStackTrace();
         } finally{
-            in.close();
+            if(in != null){
+                in.close();
+            }
         }
     }
 
