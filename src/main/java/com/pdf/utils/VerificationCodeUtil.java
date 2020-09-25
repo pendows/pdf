@@ -14,9 +14,7 @@ public class VerificationCodeUtil
 {
     public static void main(String[] args) throws IOException
     {
-
-
-        //VerificationCodeUtil.createCode(new Random());
+        VerificationCodeUtil.createCode(new Random());
     }
 
     /**
@@ -74,9 +72,8 @@ public class VerificationCodeUtil
             g.drawString(str, x, y);
         }
         g.dispose();
-        File file = new File("/Users/aquarius/IdeaProjects/pdf-item/src/main/resources/static/five.jpg");
+        File file = new File("/static/five.jpg");
         ImageIO.write(buf,"jpg",file);
-
         return resultList;
     }
 }

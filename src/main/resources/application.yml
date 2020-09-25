@@ -1,9 +1,9 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/pdf_exchange?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://221.4.62.36:13306/jeecg-boot?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
     username: root
-    password: pwd091214
+    password: e$qWDZqNPIDWbbDv
     type: com.alibaba.druid.pool.DruidDataSource
   profiles:
     active: dev
@@ -25,7 +25,7 @@ spring:
 youku1327:
     file:
       root:
-        path: "D:\\"
+        path: "/Users/aquarius/IdeaProjects/pdf/src/main/resources/file/"
 
 resources:
   static-locations: classpath:/resources/,classpath:/static/,classpath:/templates/
