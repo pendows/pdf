@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pdf.dao">
 
 	<!--根据业务类型id查询业务单据头列表-->
@@ -20,5 +20,18 @@
 		VALUES
 			(#{id}, #{fileName}, #{path}, #{fileDate}, #{fileNo}, #{fileAmout}, #{fileCapitalize}, #{remark}, null, null);
 	</insert>
+	<!--<select id="getFileContent" parameterType="com.pdf.pojo.FileContent" resultType="com.pdf.pojo.FileContent">
+		select
+		 ID as id,FILE_NAME as fileName,
+		 FILE_AMOUNT_CAPITALIZE as fileCapitalize FILE_AMOUT as fileAmout,
+		 FILE_DATE as fileDate,FILE_PATH as path,FILE_TICKET_TAX_NO as fileNo
+		from pdf_infomation where ID = #{id}
+        <if test="fileDate !='' and fileDate !=null">
+			FILE_DATE = #{fileDate}
+		</if>
+		<if test="fileAmout !='' and fileAmout !=null">
+			FILE_AMOUT = #{fileAmout}
+		</if>
+	</select>-->
 
 </mapper>

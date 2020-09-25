@@ -47,14 +47,19 @@ public class pdfController {
     public void generateQR(@RequestParam(required = false) FileContent fileContent, HttpServletResponse response) throws IOException {
         FileInputStream in = null;
         try{
-            FileContent fileContent1 = pdfSeervice.getFileContent(fileContent);
-            in =new FileInputStream(fileContent1.getPath());
-            byte[] pdfBytes = new byte[in.available()];
-            in.read(pdfBytes);
-            response.setContentType("application/pdf");
             ServletOutputStream outputStream = response.getOutputStream();
-            outputStream.write(pdfBytes);
-            outputStream.flush();
+            FileContent fileContent1 = pdfSeervice.getFileContent(fileContent);
+            if(fileContent1 == null){
+                response.setContentType("application/pdf");
+                outputStream.print("查无此票");
+            }else{
+                in =new FileInputStream(fileContent1.getPath());
+                byte[] pdfBytes = new byte[in.available()];
+                in.read(pdfBytes);
+                response.setContentType("application/pdf");
+                outputStream.write(pdfBytes);
+                outputStream.flush();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally{

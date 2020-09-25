@@ -15,8 +15,16 @@ public interface PdfDao {
             "VALUES (#{id}, #{fileName}, #{path}, #{fileDate}, #{fileNo}, #{fileAmout}, #{fileCapitalize}, #{remark}, null, null);"})
     void saveFileInfo(FileContent fileContent) throws Exception;
 
-    @Select({"select ID as id,FILE_NAME as fileName,FILE_AMOUNT_CAPITALIZE as fileCapitalize," +
-            "FILE_AMOUT as fileAmout,FILE_DATE as fileDate,FILE_PATH as path,FILE_TICKET_TAX_NO as fileNo " +
-            "from pdf_infomation where ID = #{id}"})
+    @Select({"<script>",
+            "select ID as id,FILE_NAME as fileName,FILE_AMOUNT_CAPITALIZE as fileCapitalize FILE_AMOUT as fileAmout,FILE_DATE as fileDate,FILE_PATH as path,FILE_TICKET_TAX_NO as fileNo",
+                    " from pdf_infomation ",
+                    "where ID = #{id}",
+                    "<when test='fileDate !=null'>",
+                    " AND FILE_DATE = #{fileDate}",
+                    "</when>",
+                    "<when test='fileAmout !=null'>",
+                    " AND FILE_AMOUT = #{fileAmout}",
+                    "</when>",
+                    "</script>"})
     FileContent getFileContent(FileContent fileContent) throws Exception;
 }
