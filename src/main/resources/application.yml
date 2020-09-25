@@ -25,7 +25,7 @@ spring:
 youku1327:
     file:
       root:
-        path: "/Users/aquarius/IdeaProjects/pdf/src/main/resources/file/"
+        path: "D:\\"
 
 resources:
   static-locations: classpath:/resources/,classpath:/static/,classpath:/templates/

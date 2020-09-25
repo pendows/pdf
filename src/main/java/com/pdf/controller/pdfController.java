@@ -10,6 +10,7 @@ import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.pdf.pojo.FileContent;
 import com.pdf.service.PdfSeervice;
+import com.pdf.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,8 +51,9 @@ public class pdfController {
 
     @RequestMapping("/pdf/getFileContent")
     @ResponseBody
-    public FileContent getFileContent(@RequestBody FileContent fileContent) throws Exception {
+    public FileContent getFileContent(FileContent fileContent) throws Exception {
         fileContent = pdfSeervice.getFileContent(fileContent);
+        fileContent.setFileDate(fileContent.getFileDate().substring(0,10));
         return fileContent;
     }
 

@@ -22,7 +22,7 @@
     <script type="text/javascript" src="/static/skin/script/common/My97DatePicker/WdatePicker.js"></script>
     <link href="/static/skin/script/common/My97DatePicker/skin/WdatePicker.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="/static/js/index.js"></script>
-    <script th:type="javascript">
+    <script th:inline="javascript">
         $(function () {
             if (isMobile()) {
 
@@ -31,6 +31,25 @@
             if (null != document.getElementById("imgObj") && '' != document.getElementById("imgObj")) {
                 document.getElementById("imgObj").src = "/etax/DrawImage?random=" + Math.random();
             }
+            var fileId = document.getElementById("fileId").value;
+            $.ajax({
+                type: "POST",
+                url: "/pdf/getFileContent?id="+fileId,
+                data: null,
+                dataType: "json",
+                success: function (data) {
+                    if (data.err == "error") {
+                        return false;
+                    } else {
+                        var psel = document.getElementById("hjje");
+                        psel.value = data.fileAmout;
+                        var psel = document.getElementById("tfrq");
+                        psel.value = data.fileDate;
+                        var psel = document.getElementById("spzh");
+                        psel.value = data.fileNo;
+                    }
+                }
+            });
         })
     </script>
 </head>
@@ -59,7 +78,7 @@
                                                         class="input1-gdsite-01-table-01" size="25" maxlength="25"
                                                         onkeypress="return  ((event.keyCode&gt;=48 &amp;&amp; event.keyCode&lt;=57) || event.keyCode == 46)"
                                                         onpaste="return !clipboardData.getData(&#39;text&#39;).match(/\D/)"
-                                                        ondragenter="return false" value="2024.12">
+                                                        ondragenter="return false" value="">
                     </td>
                 </tr>
                 <tr>

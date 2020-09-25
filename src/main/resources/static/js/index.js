@@ -7,7 +7,6 @@ window.onload = function ()
     var tfrq = "2019-08-31";
     var spbh = "60010316";
 
-
     var year = parseInt(tfrq.substring(0, 4));
     if (year >= 2019)
     {
