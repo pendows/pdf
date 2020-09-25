@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface PdfDao {
-    @Insert({"INSERT INTO `pdf_exchange`.`pdf_infomation` " +
+    @Insert({"INSERT INTO `pdf_infomation` " +
             "(`ID`, `FILE_NAME`, `FILE_PATH`, `FILE_DATE`, `FILE_TICKET_TAX_NO`, `FILE_AMOUT`, `FILE_AMOUNT_CAPITALIZE`, " +
             "`FILE_REMARK`, `FILE_TICKET_TAX_CODE`, `FILE_TICKET_TAX_TYPE`) " +
             "VALUES (#{id}, #{fileName}, #{path}, #{fileDate}, #{fileNo}, #{fileAmout}, #{fileCapitalize}, #{remark}, null, null);"})

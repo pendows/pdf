@@ -28,6 +28,13 @@ public class pdfController {
     @Autowired
     private PdfSeervice pdfSeervice;
 
+    /**
+     * 扫描二维码
+     * @param id
+     * @param model
+     * @param response
+     * @return
+     */
     @RequestMapping("/pdf/index")
     public String getFileContent(@RequestParam(required = false) String id, Model model,HttpServletResponse response){
         model.addAttribute("fileId",id);
@@ -35,6 +42,12 @@ public class pdfController {
         return "dzswj";
     }
 
+    /**
+     * 获取文件
+     * @param fileContent
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/pdf/getFileContent")
     @ResponseBody
     public FileContent getFileContent(@RequestBody FileContent fileContent) throws Exception {
@@ -42,7 +55,12 @@ public class pdfController {
         return fileContent;
     }
 
-
+    /**
+     *
+     * @param fileContent
+     * @param response
+     * @throws IOException
+     */
     @GetMapping(value = "/generateQR")
     public void generateQR(FileContent fileContent, HttpServletResponse response) throws IOException {
         FileInputStream in = null;

@@ -5,7 +5,7 @@
 
 	<!--根据业务类型id查询业务单据头列表-->
 	<insert id="saveFileInfo" parameterType="com.pdf.pojo.FileContent">
-		INSERT INTO `pdf_exchange`.`pdf_infomation` (
+		INSERT INTO `pdf_infomation` (
 			`ID`,
 			`FILE_NAME`,
 			`FILE_PATH`,

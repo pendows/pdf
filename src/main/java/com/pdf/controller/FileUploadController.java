@@ -38,9 +38,7 @@ public class FileUploadController {
                 filePath = new StringBuilder(fileRootPath).append(this.getFileName(originalFilename)).toString();
                 BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(filePath));
                 WaterMarkUtils.setWatermark(bos,bytes,fileContent.getId());
-                //file.transferTo(new File(filePath));
                 Map<String, String> result = PDFUtil.readPdf(filePath);
-
                 fileContent.setFileName(originalFilename);
                 fileContent.setPath(filePath);
                 fileContent.setFileNo(result.get("fileNo"));
@@ -48,6 +46,7 @@ public class FileUploadController {
                 fileContent.setFileCapitalize(result.get("fileCapitalize"));
                 pdfSeervice.saveFileInfo(fileContent);
             } catch (TemplateInputException e) {
+
             }catch (Exception e){
                 e.printStackTrace();
             }
