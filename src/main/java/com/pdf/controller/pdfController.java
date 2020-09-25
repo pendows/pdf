@@ -43,15 +43,15 @@ public class pdfController {
     }
 
 
-    @RequestMapping("/generateQR")
-    public void generateQR(@RequestParam(required = false) FileContent fileContent, HttpServletResponse response) throws IOException {
+    @GetMapping(value = "/generateQR")
+    public void generateQR(FileContent fileContent, HttpServletResponse response) throws IOException {
         FileInputStream in = null;
         try{
             ServletOutputStream outputStream = response.getOutputStream();
             FileContent fileContent1 = pdfSeervice.getFileContent(fileContent);
             if(fileContent1 == null){
                 response.setContentType("application/pdf");
-                outputStream.print("查无此票");
+                outputStream.write(null);
             }else{
                 in =new FileInputStream(fileContent1.getPath());
                 byte[] pdfBytes = new byte[in.available()];

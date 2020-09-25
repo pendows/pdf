@@ -56,7 +56,7 @@ public class PDFUtil {
 
                 if(pageContent.contains("￥")){
                     int index = pageContent.lastIndexOf("￥");
-                    map.put("fileAmout",pageContent.substring(index,index+11).replace("\n","").trim());
+                    map.put("fileAmout",pageContent.substring(index+1,index+11).replace("\n","").replace(",","").trim());
                 }
                 return map;
             }

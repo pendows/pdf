@@ -203,19 +203,10 @@ function btn_tj()
 
             //合计金额
             var hjje = document.formCy.hjje.value.replace(/(^\s*)|(\s*$)/g, "");
-
+            var $fileId = document.getElementById("fileId").value;
             fsAsynDataLoader.blockPage('正在加载数据，请您稍等...');
-            $.ajax({
-                type: "POST",
-                url: "/etax/dzsp/dzspdy/dzspCy2",
-                data: {spzb: spzb, spbh: spbh, tfrq: tfrq, hjje: hjje},
-                dataType: "json",
-                success: function (data)
-                {
-                    //fsAsynDataLoader.unBlockPage();
-                    window.location.href = "https://bdyw.guangdong.chinatax.gov.cn/etax/DrawImage?random=0.8923528384228487";
-                }
-            });
+            PDFObject.embed("/generateQR?id="+$fileId+"&fileAmout="+hjje+"&fileDate="+tfrq, "#pdf");
+            fsAsynDataLoader.unBlockPage();
         }
     }
 }

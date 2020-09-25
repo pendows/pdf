@@ -16,11 +16,11 @@ public interface PdfDao {
     void saveFileInfo(FileContent fileContent) throws Exception;
 
     @Select({"<script>",
-            "select ID as id,FILE_NAME as fileName,FILE_AMOUNT_CAPITALIZE as fileCapitalize FILE_AMOUT as fileAmout,FILE_DATE as fileDate,FILE_PATH as path,FILE_TICKET_TAX_NO as fileNo",
+            "select ID as id,FILE_NAME as fileName,FILE_AMOUNT_CAPITALIZE as fileCapitalize,FILE_AMOUT as fileAmout,FILE_DATE as fileDate,FILE_PATH as path,FILE_TICKET_TAX_NO as fileNo",
                     " from pdf_infomation ",
                     "where ID = #{id}",
                     "<when test='fileDate !=null'>",
-                    " AND FILE_DATE = #{fileDate}",
+                    " AND DATE_FORMAT(FILE_DATE,'%Y-%m-%d')=#{fileDate}",
                     "</when>",
                     "<when test='fileAmout !=null'>",
                     " AND FILE_AMOUT = #{fileAmout}",
