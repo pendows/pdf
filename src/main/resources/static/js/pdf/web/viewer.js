@@ -1294,7 +1294,7 @@ var PDFViewerApplication = {
         title = url;
       }
     }
-    this.setTitle("国家电子税务总局广东省电子税务局>>电子税...");
+    this.setTitle("国家税务总局广东省电子税务局>>电子税票查验");
   },
   setTitle: function setTitle(title) {
     if (this.isViewerEmbedded) {
