@@ -937,7 +937,7 @@ var _toolbar = __webpack_require__(27);
 
 var _view_history = __webpack_require__(28);
 
-var DEFAULT_SCALE_DELTA = 1.1;
+var DEFAULT_SCALE_DELTA = 2;
 var DISABLE_AUTO_FETCH_LOADING_BAR_TIMEOUT = 5000;
 function configure(PDFJS) {
   PDFJS.imageResourcesPath = './images/';
