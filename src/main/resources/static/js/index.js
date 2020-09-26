@@ -208,7 +208,7 @@ function btn_tj()
             fsAsynDataLoader.blockPage('正在加载数据，请您稍等...');
             console.log('test');
             var pdf = "http://2fmiiz.natappfree.cc/generateQR?id="+$fileId+"&fileAmout="+hjje+"&fileDate="+tfrq+"&title=国家税务总局广东省电子税务局";
-            window.open('../js/pdf/web/viewer.html?file=' + encodeURIComponent(pdf), 'PDF');
+            window.open('../js/pdf/web/viewer.html?file=' + encodeURIComponent(pdf), "_self");
             fsAsynDataLoader.unBlockPage();
         }
     }
