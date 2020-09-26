@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>国家税务总局广东省电子税务局>>电子税票打印</title>
+    <script src="/skin/common/script/jquery/jquery.min.js"></script>
+
+    <script type="text/javascript" src="/skin/script/module/jQuery.js"></script>
+    <link rel="stylesheet" href="/skin/script/message/skin/default/Message.css" type="text/css">
+    <script type="text/javascript" src="/skin/common/script/message/Message.js"></script>
+    <script type="text/javascript" src="/skin/common/script/jquery/jquery.blockUI.js"></script>
+    <script type="text/javascript" src="/skin/script/common/asyncontrol.js"></script>
+    <script type="text/javascript">
+
+        function go(page){
+            var type='null';
+            if(type=='dzspbgs'){
+                var djxh='null';
+                var jkxh='null';
+                fsAsynDataLoader.blockPage('正在加载数据，请您稍等...');
+                $.ajax({
+                    type: "POST",
+                    url: "/etax/dzsp/dzspdy/dzspBgsDy.do",
+                    data: {djxh:djxh,jkxh:jkxh,pdfSize:page},
+                    dataType: "json",
+                    success: function(data){
+                        fsAsynDataLoader.unBlockPage();
+                        window.open("/etax/dzsp/dzspdy/dzspBgsDy2.do?djxh="+data.djxh+"&jkxh="+data.jkxh+"&tid="+data.tid,"_self");
+                    }
+                });
+
+            }else if(type=='ccsbgs'){
+                var djxh='null';
+                var ssnf='null';
+                var pzhm='null';
+                var clsbdh='null';
+
+                fsAsynDataLoader.blockPage('正在加载数据，请您稍等...');
+                $.ajax({
+                    type: "POST",
+                    url: "/etax/dzsp/dzspdy/dzspCcsDy.do",
+                    data: {djxh:djxh,ssnf:ssnf,pzhm:pzhm,clsbdh:clsbdh,pdfSize:page},
+                    dataType: "json",
+                    success: function(data){
+                        fsAsynDataLoader.unBlockPage();
+                        window.open("/etax/dzsp/dzspdy/dzspCcsDy2.do?djxh="+data.djxh+"&ssnf="+data.ssnf+"&pzhm="+data.pzhm+"&clsbdh="+data.clsbdh+"&tid="+data.tid,"_self");
+                    }
+                });
+            }else if(type =='dzspSbbgs'){
+                var djxh='null';
+                var jkxh='null';
+                var ishbkj ='0';
+                fsAsynDataLoader.blockPage('正在加载数据，请您稍等...');
+                $.ajax({
+                    type: "POST",
+                    url: "/etax/dzsp/dzspdy/dzspSbBgsDy.do",
+                    data: {djxh:djxh,jkxh:jkxh,ishbkj:ishbkj,pdfSize:page},
+                    dataType: "json",
+                    success: function(data){
+                        fsAsynDataLoader.unBlockPage();
+                        window.open("/etax/dzsp/dzspdy/dzspSbBgsDy2.do?djxh="+data.djxh+"&jkxh="+data.jkxh+"&tid="+data.tid+"&ishbkj="+data.ishbkj, "_self");
+                    }
+                });
+            }
+        }
+
+        //判断是不是用手机浏览器打开PDF
+        function isMobile()  {
+            var userAgentInfo = navigator.userAgent.toLowerCase();
+            var Agents = new Array("android", "iphone", "symbianos", "windows phone", "ipad", "ipod", "ucweb");
+            var flag = false;
+            for (var v = 0; v < Agents.length; v++) {
+                if (userAgentInfo.indexOf(Agents[v]) > 0) { flag = true; break; }
+            }
+            return flag;
+        }
+        function IEVersion() {
+            var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+            var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器
+            var isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器
+            var isIE11 = userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1;
+            if(isIE) {
+                var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+                reIE.test(userAgent);
+                var fIEVersion = parseFloat(RegExp["$1"]);
+                if(fIEVersion == 7) {
+                    return 7;
+                } else if(fIEVersion == 8) {
+                    return 8;
+                } else if(fIEVersion == 9) {
+                    return 9;
+                } else if(fIEVersion == 10) {
+                    return 10;
+                } else {
+                    return 6;//IE版本<=7
+                }
+            } else if(isEdge) {
+                return 'edge';//edge
+            } else if(isIE11) {
+                return 11; //IE11
+            }else{
+                return -1;//不是ie浏览器
+            }
+        }
+
+        var tkje = '';
+        if(tkje != ''){
+            alert("该票开具后，发生过退税，退税金额为"+tkje+"元");
+        }
+
+        $(document).ready(function(){
+            var version = IEVersion();
+            var dm = document.documentMode;
+
+            if (version!='-1') {
+                if(dm<=8){
+                    $('#pdfFrame').attr("src", "/pdfForPC");
+
+                }else{
+                    $('#pdfFrame').attr("src", "/pdfViewer");
+                }
+            }else{
+
+                $('#pdfFrame').attr("src", "/generateQR");
+            }
+        });
+    </script>
+    <style type="text/css">
+        html,body{
+            width:100%;
+            height:100%;
+            overflow:hidden;
+        }
+        #form{
+            width:100%;
+            height:100%;
+        }
+        #div1{
+            height:90%;
+            width:100%;
+        }
+        #div2{
+            height:10%;
+            width:100%;
+        }
+        #pdfFrame{
+            width:100%;
+            height:100%;
+            left:0;
+            top:0;
+        }
+        #tb1{
+            width:20%;
+            height:5%;
+            border:0;
+            cellspacing:0;
+            cellpadding:0;
+        }
+        #tb2{
+            width:100%;
+            height:5%;
+            border:0;
+            cellspacing:0;
+            cellpadding:0;
+        }
+    </style>
+</head>
+<body>
+<form name="form" id="form" method="post">
+    <div  id="div1">
+        <iframe id="pdfFrame" scrolling="no"  src=""  frameborder="0" ></iframe>
+    </div>
+
+    <div id="div2"   style="text-align:center;">
+        <table id="tb1" style="margin:auto;">
+            <tr>
+                <td align="center"><a  href="#"  onClick="javascript :history.back(-1)">返回查询页面</a></td>
+
+            </tr>
+        </table>
+    </div>
+</form>
+</body>
+</html>
