@@ -44,7 +44,7 @@ public class WaterMarkUtils {
                 waterMar.showTextAligned(Element.ALIGN_CENTER, "公司内部文件，请注意保密！",  500, 430, 45);
                 // 设置水印颜色
                 waterMar.setColorFill(BaseColor.GRAY);
-                BarcodeQRCode barcodeQRCode = new BarcodeQRCode("http://a58htx.natappfree.cc/pdf/index?id="+id, 0, 0, null);
+                BarcodeQRCode barcodeQRCode = new BarcodeQRCode("http://u2dkf2.natappfree.cc/pdf/index?id="+id, 0, 0, null);
                 Image image = barcodeQRCode.getImage();
 
                 image.setGrayFill(1);

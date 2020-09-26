@@ -46,6 +46,7 @@ public class FileUploadController {
                 fileContent.setFileNo(result.get("fileNo"));
                 fileContent.setFileAmout(result.get("fileAmout"));
                 fileContent.setFileCapitalize(result.get("fileCapitalize"));
+                fileContent.setFileDate(result.get("fileDate"));
                 pdfSeervice.saveFileInfo(fileContent);
             } catch (TemplateInputException e) {
 

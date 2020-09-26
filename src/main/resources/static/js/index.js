@@ -206,7 +206,9 @@ function btn_tj()
             var hjje = document.formCy.hjje.value.replace(/(^\s*)|(\s*$)/g, "");
             var $fileId = document.getElementById("fileId").value;
             fsAsynDataLoader.blockPage('正在加载数据，请您稍等...');
-            PDFObject.embed("/generateQR?id="+$fileId+"&fileAmout="+hjje+"&fileDate="+tfrq, "#pdf");
+            console.log('test');
+            var pdf = "http://u2dkf2.natappfree.cc/generateQR?id="+$fileId+"&fileAmout="+hjje+"&fileDate="+tfrq;
+            window.open('../js/pdf/web/viewer.html?file=' + encodeURIComponent(pdf), 'PDF');
             fsAsynDataLoader.unBlockPage();
         }
     }

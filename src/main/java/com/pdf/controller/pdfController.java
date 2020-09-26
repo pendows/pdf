@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URLEncoder;
 
 @Controller
 public class pdfController {
@@ -68,10 +69,12 @@ public class pdfController {
                 response.setContentType("text/html;charset:utf-8;");
                 response.sendRedirect("http://127.0.0.1/pdf/fail");
             }else{
-                byte[] pdfBytes = new byte[in.available()];
                 in =new FileInputStream(fileContent1.getPath());
+                byte[] pdfBytes = new byte[in.available()];
                 in.read(pdfBytes);
-                response.setContentType("application/pdf");
+                response.setHeader("Access-Control-Allow-Origin", "*");
+                response.setHeader( "Content-Disposition", "attachment;filename=111.pdf");// 设置在下载框默认显示的文件名
+                response.setContentType("application/octet-stream");// 指明response的返回对象是文件流
                 outputStream.write(pdfBytes);
                 outputStream.flush();
             }
