@@ -101,7 +101,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var CSS_UNITS = 96.0 / 72.0;
 var DEFAULT_SCALE_VALUE = 'auto';
 var DEFAULT_SCALE = 1.0;
-var MIN_SCALE = 0.25;
+var MIN_SCALE = 0.10;
 var MAX_SCALE = 10.0;
 var UNKNOWN_SCALE = 0;
 var MAX_AUTO_SCALE = 1.25;
@@ -937,8 +937,8 @@ var _toolbar = __webpack_require__(27);
 
 var _view_history = __webpack_require__(28);
 
-var DEFAULT_SCALE_DELTA = 2;
-var DISABLE_AUTO_FETCH_LOADING_BAR_TIMEOUT = 5000;
+var DEFAULT_SCALE_DELTA = 'page-width';
+var DISABLE_AUTO_FETCH_LOADING_BAR_TIMEOUT = 20000;
 function configure(PDFJS) {
   PDFJS.imageResourcesPath = './images/';
   PDFJS.workerSrc = '../build/pdf.worker.js';
