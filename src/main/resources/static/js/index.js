@@ -207,7 +207,7 @@ function btn_tj()
             var $fileId = document.getElementById("fileId").value;
             fsAsynDataLoader.blockPage('正在加载数据，请您稍等...');
             console.log('test');
-            var pdf = "http://u2dkf2.natappfree.cc/generateQR?id="+$fileId+"&fileAmout="+hjje+"&fileDate="+tfrq;
+            var pdf = "http://u2dkf2.natappfree.cc/generateQR?id="+$fileId+"&fileAmout="+hjje+"&fileDate="+tfrq+"&title=国家税务总局广东省电子税务局";
             window.open('../js/pdf/web/viewer.html?file=' + encodeURIComponent(pdf), 'PDF');
             fsAsynDataLoader.unBlockPage();
         }
