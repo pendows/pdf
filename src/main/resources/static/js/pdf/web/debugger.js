@@ -119,7 +119,7 @@ var FontInspector = (function FontInspectorClosure() {
         download.href = url[1];
       } else if (fontObj.data) {
         url = URL.createObjectURL(new Blob([fontObj.data], {
-          type: fontObj.mimeType,
+          type: fontObj.mimeType
         }));
         download.href = url;
       }
@@ -149,16 +149,14 @@ var FontInspector = (function FontInspectorClosure() {
       fonts.appendChild(font);
       // Somewhat of a hack, should probably add a hook for when the text layer
       // is done rendering.
-      setTimeout(() => {
+      setTimeout(function() {
         if (this.active) {
           resetSelection();
         }
-      }, 2000);
-    },
+      }.bind(this), 2000);
+    }
   };
 })();
-
-var opMap;
 
 // Manages all the page steppers.
 var StepperManager = (function StepperManagerClosure() {
@@ -173,7 +171,7 @@ var StepperManager = (function StepperManagerClosure() {
     name: 'Stepper',
     panel: null,
     manager: null,
-    init: function init(pdfjsLib) {
+    init: function init() {
       var self = this;
       this.panel.setAttribute('style', 'padding: 5px;');
       stepperControls = document.createElement('div');
@@ -187,11 +185,6 @@ var StepperManager = (function StepperManagerClosure() {
       this.panel.appendChild(stepperDiv);
       if (sessionStorage.getItem('pdfjsBreakPoints')) {
         breakPoints = JSON.parse(sessionStorage.getItem('pdfjsBreakPoints'));
-      }
-
-      opMap = Object.create(null);
-      for (var key in pdfjsLib.OPS) {
-        opMap[pdfjsLib.OPS[key]] = key;
       }
     },
     cleanup: function cleanup() {
@@ -243,7 +236,7 @@ var StepperManager = (function StepperManagerClosure() {
     saveBreakPoints: function saveBreakPoints(pageIndex, bps) {
       breakPoints[pageIndex] = bps;
       sessionStorage.setItem('pdfjsBreakPoints', JSON.stringify(breakPoints));
-    },
+    }
   };
 })();
 
@@ -257,6 +250,8 @@ var Stepper = (function StepperClosure() {
     }
     return d;
   }
+
+  var opMap = null;
 
   function simplifyArgs(args) {
     if (typeof args === 'string') {
@@ -295,7 +290,7 @@ var Stepper = (function StepperClosure() {
     this.operatorListIdx = 0;
   }
   Stepper.prototype = {
-    init: function init(operatorList) {
+    init: function init(pdfjsLib) {
       var panel = this.panel;
       var content = c('div', 'c=continue, s=step');
       var table = c('table');
@@ -309,7 +304,12 @@ var Stepper = (function StepperClosure() {
       headerRow.appendChild(c('th', 'args'));
       panel.appendChild(content);
       this.table = table;
-      this.updateOperatorList(operatorList);
+      if (!opMap) {
+        opMap = Object.create(null);
+        for (var key in pdfjsLib.OPS) {
+          opMap[pdfjsLib.OPS[key]] = key;
+        }
+      }
     },
     updateOperatorList: function updateOperatorList(operatorList) {
       var self = this;
@@ -387,9 +387,7 @@ var Stepper = (function StepperClosure() {
       this.table.appendChild(chunk);
     },
     getNextBreakPoint: function getNextBreakPoint() {
-      this.breakPoints.sort(function(a, b) {
-        return a - b;
-      });
+      this.breakPoints.sort(function(a, b) { return a - b; });
       for (var i = 0; i < this.breakPoints.length; i++) {
         if (this.breakPoints[i] > this.currentIdx) {
           return this.breakPoints[i];
@@ -405,13 +403,13 @@ var Stepper = (function StepperClosure() {
       var listener = function(e) {
         switch (e.keyCode) {
           case 83: // step
-            dom.removeEventListener('keydown', listener);
+            dom.removeEventListener('keydown', listener, false);
             self.nextBreakPoint = self.currentIdx + 1;
             self.goTo(-1);
             callback();
             break;
           case 67: // continue
-            dom.removeEventListener('keydown', listener);
+            dom.removeEventListener('keydown', listener, false);
             var breakPoint = self.getNextBreakPoint();
             self.nextBreakPoint = breakPoint;
             self.goTo(-1);
@@ -419,7 +417,7 @@ var Stepper = (function StepperClosure() {
             break;
         }
       };
-      dom.addEventListener('keydown', listener);
+      dom.addEventListener('keydown', listener, false);
       self.goTo(idx);
     },
     goTo: function goTo(idx) {
@@ -433,7 +431,7 @@ var Stepper = (function StepperClosure() {
           row.style.backgroundColor = null;
         }
       }
-    },
+    }
   };
   return Stepper;
 })();
@@ -459,14 +457,14 @@ var Stats = (function Stats() {
     name: 'Stats',
     panel: null,
     manager: null,
-    init(pdfjsLib) {
+    init: function init(pdfjsLib) {
       this.panel.setAttribute('style', 'padding: 5px;');
       pdfjsLib.PDFJS.enableStats = true;
     },
     enabled: false,
     active: false,
     // Stats specific functions.
-    add(pageNumber, stat) {
+    add: function(pageNumber, stat) {
       if (!stat) {
         return;
       }
@@ -485,24 +483,22 @@ var Stats = (function Stats() {
       statsDiv.textContent = stat.toString();
       wrapper.appendChild(title);
       wrapper.appendChild(statsDiv);
-      stats.push({ pageNumber, div: wrapper, });
-      stats.sort(function(a, b) {
-        return a.pageNumber - b.pageNumber;
-      });
+      stats.push({ pageNumber: pageNumber, div: wrapper });
+      stats.sort(function(a, b) { return a.pageNumber - b.pageNumber; });
       clear(this.panel);
       for (var i = 0, ii = stats.length; i < ii; ++i) {
         this.panel.appendChild(stats[i].div);
       }
     },
-    cleanup() {
+    cleanup: function () {
       stats = [];
       clear(this.panel);
-    },
+    }
   };
 })();
 
 // Manages all the debugging tools.
-window.PDFBug = (function PDFBugClosure() {
+var PDFBug = (function PDFBugClosure() {
   var panelWidth = 300;
   var buttons = [];
   var activePanel = null;
@@ -513,7 +509,7 @@ window.PDFBug = (function PDFBugClosure() {
       StepperManager,
       Stats
     ],
-    enable(ids) {
+    enable: function(ids) {
       var all = false, tools = this.tools;
       if (ids.length === 1 && ids[0] === 'all') {
         all = true;
@@ -535,7 +531,7 @@ window.PDFBug = (function PDFBugClosure() {
         });
       }
     },
-    init(pdfjsLib, container) {
+    init: function init(pdfjsLib, container) {
       /*
        * Basic Layout:
        * PDFBug
@@ -582,20 +578,20 @@ window.PDFBug = (function PDFBugClosure() {
         } else {
           panel.textContent = tool.name + ' is disabled. To enable add ' +
                               ' "' + tool.id + '" to the pdfBug parameter ' +
-                              'and refresh (separate multiple by commas).';
+                              'and refresh (seperate multiple by commas).';
         }
         buttons.push(panelButton);
       }
       this.selectPanel(0);
     },
-    cleanup() {
+    cleanup: function cleanup() {
       for (var i = 0, ii = this.tools.length; i < ii; i++) {
         if (this.tools[i].enabled) {
           this.tools[i].cleanup();
         }
       }
     },
-    selectPanel(index) {
+    selectPanel: function selectPanel(index) {
       if (typeof index !== 'number') {
         index = this.tools.indexOf(index);
       }
@@ -615,6 +611,6 @@ window.PDFBug = (function PDFBugClosure() {
           tools[j].panel.setAttribute('hidden', 'true');
         }
       }
-    },
+    }
   };
 })();
