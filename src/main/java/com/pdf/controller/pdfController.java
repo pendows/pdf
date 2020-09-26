@@ -66,7 +66,12 @@ public class pdfController {
     @ResponseBody
     public FileContent getFileContent(FileContent fileContent) throws Exception {
         fileContent = pdfSeervice.getFileContent(fileContent);
-        fileContent.setFileDate(fileContent.getFileDate().substring(0,10));
+        if(fileContent==null){
+            fileContent = new FileContent();
+            fileContent.setRemark("1");
+        }else{
+            fileContent.setFileDate(fileContent.getFileDate().substring(0,10));
+        }
         return fileContent;
     }
 
@@ -82,10 +87,8 @@ public class pdfController {
         try{
             ServletOutputStream outputStream = response.getOutputStream();
             FileContent fileContent1 = pdfSeervice.getFileContent(fileContent);
-            String requestURL = request.getRequestURL().toString();
             if(fileContent1 == null){
-                response.setContentType("text/html;charset:utf-8;");
-                response.sendRedirect("http://127.0.0.1/pdf/fail");
+                fileContent1.setRemark("1");
             }else{
                 in =new FileInputStream(fileContent1.getPath());
                 byte[] pdfBytes = new byte[in.available()];

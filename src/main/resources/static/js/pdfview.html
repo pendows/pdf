@@ -112,10 +112,31 @@
             var r = window.location.search.substr(1).match(reg);
             if (r != null) return unescape(r[2]); return null;
         };
+
         $(document).ready(function(){
+            $.ajax({
+                type: "POST",
+                url: "/pdf/getFileContent?id="+getQueryString('id')+"&fileAmout="+getQueryString('fileAmout')+"&fileDate="+getQueryString('fileDate'),
+                data: null,
+                dataType: "json",
+                success: function (data)
+                {
+                    if (data.remark == "1")
+                    {
+                        alert("查无此票");
+                        document.location = '/pdf/index?id='+getQueryString('id');
+                    } else
+                    {
+
+                        fsAsynDataLoader.unBlockPage();
+                        window.location.href = "/etax/dzsp/dzspdy/dzspCy2.do?tid=" + data.tid;
+                    }
+                }
+            });
+
             var version = IEVersion();
             var dm = document.documentMode;
-            var url =  "http://aa.free.idcfengye.com/js/pdf/web/viewer.html?id="+getQueryString('id')+"&fileAmout="+getQueryString('fileAmout')+"&fileDate="+getQueryString('fileDate')+"+&file=http://aa.free.idcfengye.com/generateQR"
+            var url =  "http://uraufh.natappfree.cc/js/pdf/web/viewer.html?id="+getQueryString('id')+"&fileAmout="+getQueryString('fileAmout')+"&fileDate="+getQueryString('fileDate')+"+&file=http://uraufh.natappfree.cc/generateQR"
             if (version!='-1') {
                 if(dm<=8){
                     $('#pdfFrame').attr("src", url);
