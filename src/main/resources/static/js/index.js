@@ -203,12 +203,12 @@ function btn_tj()
             }
 
             //合计金额
-            var hjje = document.formCy.hjje.value.replace(/(^\s*)|(\s*$)/g, "");
+            var psel = document.getElementById("hjje").value;
             var $fileId = document.getElementById("fileId").value;
             fsAsynDataLoader.blockPage('正在加载数据，请您稍等...');
             console.log('test');
             //var pdf = "http://2fmiiz.natappfree.cc/generateQR?id="+$fileId+"&fileAmout="+hjje+"&fileDate="+tfrq+"&title=国家税务总局广东省电子税务局";
-            window.location.href = "/static/js/pdfview.html?id="+$fileId;
+            window.location.href = "/js/pdfview.html?id="+$fileId+"&fileAmout="+psel+"&fileDate="+tfrq
             //window.open('/static/js/index.html', "PDF",'height=1000, width=1000, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no');
             fsAsynDataLoader.unBlockPage();
         }

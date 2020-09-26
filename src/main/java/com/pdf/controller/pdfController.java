@@ -60,11 +60,12 @@ public class pdfController {
 
 
     @RequestMapping(value = "/generateQR")
-    public void generateQR(String id, HttpServletResponse response, HttpServletRequest request) throws IOException {
+    public void generateQR(FileContent fileContent, HttpServletResponse response, HttpServletRequest request) throws IOException {
         FileInputStream in = null;
         try{
             ServletOutputStream outputStream = response.getOutputStream();
             FileContent fileContent1 = pdfSeervice.getFileContent(fileContent);
+            String requestURL = request.getRequestURL().toString();
             if(fileContent1 == null){
                 response.setContentType("text/html;charset:utf-8;");
                 response.sendRedirect("http://127.0.0.1/pdf/fail");

@@ -1,16 +1,7 @@
 <!DOCTYPE html>
-<html
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8">
-    <meta name=referrer content=never>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-    <meta name="renderer" content="webkit">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="viewport" id="viewport" content="width=640px, user-scalable=no">
-    <meta http-equiv="X-Frame-Options" content="deny">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>国家税务总局广东省电子税务局>>电子税票打印</title>
     <script src="/skin/common/script/jquery/jquery.min.js"></script>
 
@@ -116,6 +107,27 @@
         if(tkje != ''){
             alert("该票开具后，发生过退税，退税金额为"+tkje+"元");
         }
+        var getQueryString= function(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        };
+        $(document).ready(function(){
+            var version = IEVersion();
+            var dm = document.documentMode;
+            var url =  "http://y7qxxt.natappfree.cc/js/pdf/web/viewer.html?id="+getQueryString('id')+"&fileAmout="+getQueryString('fileAmout')+"&fileDate="+getQueryString('fileDate')+"+&file=http://y7qxxt.natappfree.cc/generateQR"
+            if (version!='-1') {
+                if(dm<=8){
+                    $('#pdfFrame').attr("src", url);
+
+                }else{
+                    $('#pdfFrame').attr("src", url);
+                }
+            }else{
+
+                $('#pdfFrame').attr("src", url);
+            }
+        });
 
     </script>
     <style type="text/css">
@@ -161,7 +173,7 @@
 <body>
 <form name="form" id="form" method="post">
     <div  id="div1">
-        <iframe id="pdfFrame" scrolling="no"  src="http://nh2vpg.natappfree.cc/static/js/pdf/web/viewer.html?file=http://nh2vpg.natappfree.cc/generateQR?id=759416344356585472"  frameborder="0" ></iframe>
+        <iframe id="pdfFrame" scrolling="no"  src=""  frameborder="0" ></iframe>
     </div>
 
     <div id="div2"   style="text-align:center;">
