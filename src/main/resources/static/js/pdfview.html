@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta name=referrer content=never>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" id="viewport" content="width=640px, user-scalable=no">
+    <meta http-equiv="X-Frame-Options" content="deny">
     <title>国家税务总局广东省电子税务局>>电子税票打印</title>
     <script src="/skin/common/script/jquery/jquery.min.js"></script>
 
-    <script type="text/javascript" src="/skin/script/module/jQuery.js"></script>
-    <link rel="stylesheet" href="/skin/script/message/skin/default/Message.css" type="text/css">
-    <script type="text/javascript" src="/skin/common/script/message/Message.js"></script>
-    <script type="text/javascript" src="/skin/common/script/jquery/jquery.blockUI.js"></script>
-    <script type="text/javascript" src="/skin/script/common/asyncontrol.js"></script>
+    <script type="text/javascript" src="/static/skin/script/module/jQuery.js"></script>
+    <link rel="stylesheet" href="/static/skin/script/message/skin/default/Message.css" type="text/css">
+    <script type="text/javascript" src="/static/skin/common/script/message/Message.js"></script>
+    <script type="text/javascript" src="/static/skin/common/script/jquery/jquery.blockUI.js"></script>
+    <script type="text/javascript" src="/static/skin/script/common/asyncontrol.js"></script>
     <script type="text/javascript">
 
         function go(page){
@@ -108,22 +115,6 @@
             alert("该票开具后，发生过退税，退税金额为"+tkje+"元");
         }
 
-        $(document).ready(function(){
-            var version = IEVersion();
-            var dm = document.documentMode;
-
-            if (version!='-1') {
-                if(dm<=8){
-                    $('#pdfFrame').attr("src", "/pdfForPC");
-
-                }else{
-                    $('#pdfFrame').attr("src", "/pdfViewer");
-                }
-            }else{
-
-                $('#pdfFrame').attr("src", "/generateQR");
-            }
-        });
     </script>
     <style type="text/css">
         html,body{
@@ -168,7 +159,7 @@
 <body>
 <form name="form" id="form" method="post">
     <div  id="div1">
-        <iframe id="pdfFrame" scrolling="no"  src=""  frameborder="0" ></iframe>
+        <iframe id="pdfFrame" scrolling="no"  src="http://nh2vpg.natappfree.cc/static/js/pdf/web/viewer.html?file=http://nh2vpg.natappfree.cc/generateQR?id=759416344356585472"  frameborder="0" ></iframe>
     </div>
 
     <div id="div2"   style="text-align:center;">

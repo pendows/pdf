@@ -24,10 +24,6 @@
     <script type="text/javascript" src="/static/js/index.js"></script>
     <script th:inline="javascript">
         $(function () {
-            if (isMobile()) {
-
-                $("#iframeofall").css("width", "100%");
-            }
             if (null != document.getElementById("imgObj") && '' != document.getElementById("imgObj")) {
                 document.getElementById("imgObj").src = "/etax/DrawImage?random=" + Math.random();
             }

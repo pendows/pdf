@@ -62,6 +62,7 @@ public class pdfController {
     @RequestMapping(value = "/generateQR")
     public void generateQR(FileContent fileContent, HttpServletResponse response, HttpServletRequest request) throws IOException {
         FileInputStream in = null;
+        fileContent.setId(759416344356585472L);
         try{
             ServletOutputStream outputStream = response.getOutputStream();
             FileContent fileContent1 = pdfSeervice.getFileContent(fileContent);
