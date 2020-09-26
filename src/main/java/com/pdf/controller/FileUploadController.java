@@ -18,7 +18,7 @@ import java.util.Map;
 
 @Controller
 public class FileUploadController {
-    @Value("${youku1327.file.root.path}")
+    @Value("${youku.file.root.path}")
     private String fileRootPath;
     @Autowired
     private PdfSeervice pdfSeervice;
@@ -45,6 +45,7 @@ public class FileUploadController {
                 fileContent.setPath(filePath);
                 fileContent.setFileNo(result.get("fileNo"));
                 fileContent.setFileAmout(result.get("fileAmout"));
+                fileContent.setFileDate(result.get("fileDate"));
                 fileContent.setFileCapitalize(result.get("fileCapitalize"));
                 fileContent.setFileDate(result.get("fileDate"));
                 pdfSeervice.saveFileInfo(fileContent);

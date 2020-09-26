@@ -22,10 +22,10 @@ spring:
     multipart:
       max-file-size: 200MB
       max-request-size: 600MB
-youku1327:
+youku:
     file:
       root:
-        path: "D:\\"
+        path: "/Users/aquarius/Desktop/"
 
 resources:
   static-locations: classpath:/resources/,classpath:/static/,classpath:/templates/

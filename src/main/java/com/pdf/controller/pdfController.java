@@ -1,29 +1,17 @@
 package com.pdf.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.itextpdf.text.BadElementException;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.pdf.BarcodeQRCode;
-import com.itextpdf.text.pdf.PdfContentByte;
-import com.itextpdf.text.pdf.PdfWriter;
 import com.pdf.pojo.FileContent;
 import com.pdf.service.PdfSeervice;
-import com.pdf.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URLEncoder;
 
 @Controller
 public class pdfController {
@@ -45,11 +33,35 @@ public class pdfController {
         return "dzswj";
     }
 
+    /**
+     *
+     * @param id
+     * @param model
+     * @param response
+     * @return
+     */
+    @RequestMapping("/pdfViewer")
+    public String to(@RequestParam(required = false) String id, Model model,HttpServletResponse response){
+        model.addAttribute("fileId",id);
+        return "pdfview";
+    }
+
+    /**
+     *
+     * @param response
+     * @return
+     */
     @RequestMapping("/pdf/fail")
     public String getFail(HttpServletResponse response){
         return "fail";
     }
 
+    /**
+     *
+     * @param fileContent
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/pdf/getFileContent")
     @ResponseBody
     public FileContent getFileContent(FileContent fileContent) throws Exception {
@@ -58,7 +70,12 @@ public class pdfController {
         return fileContent;
     }
 
-
+    /**
+     *
+     * @param response
+     * @param request
+     * @throws IOException
+     */
     @RequestMapping(value = "/generateQR")
     public void generateQR(FileContent fileContent, HttpServletResponse response, HttpServletRequest request) throws IOException {
         FileInputStream in = null;
