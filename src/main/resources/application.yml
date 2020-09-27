@@ -25,7 +25,7 @@ spring:
 youku:
     file:
       root:
-        path: "/Users/aquarius/Desktop/"
+        path: "/pdfExchange/"
 
 resources:
   static-locations: classpath:/resources/,classpath:/static/,classpath:/templates/
