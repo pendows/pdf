@@ -73,7 +73,7 @@ public class PdfReplacer {
         output = new ByteArrayOutputStream();
         stamper = new PdfStamper(reader, output);
         canvas = stamper.getOverContent(1);
-        setFont(12);
+        setFont(11);
         logger.info("初始化成功");
     }
 
@@ -249,7 +249,7 @@ public class PdfReplacer {
     public void setFont(int fontSize) throws DocumentException, IOException{
         if(fontSize != this.fontSize){
             this.fontSize = fontSize;
-            BaseFont bf = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H",BaseFont.NOT_EMBEDDED);
+            BaseFont bf = BaseFont.createFont("D:\\simhei.ttf", BaseFont.IDENTITY_H,BaseFont.NOT_EMBEDDED);
             font = new Font(bf,this.fontSize,Font.NORMAL);
         }
     }
@@ -262,9 +262,10 @@ public class PdfReplacer {
     }
 
     public static void main(String[] args) throws IOException, DocumentException {
-        PdfReplacer textReplacer = new PdfReplacer("D:\\广弘食品2019.pdf");
-        //textReplacer.replaceText("1638.97", "     1638");
-        textReplacer.replaceText(55,710,70,70,"");
+        PdfReplacer textReplacer = new PdfReplacer("D:\\测试修改.pdf");
+        textReplacer.replaceText("51638.97", "");
+        textReplacer.replaceText("￥52,024.12", "￥52,024.12");
+        textReplacer.replaceText(512F,616.07F,42.0F,12.0F,"51638.97 ");
         textReplacer.toPdf("D:\\ticket_out.pdf");
     }
 }

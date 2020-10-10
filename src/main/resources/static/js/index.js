@@ -111,7 +111,7 @@ function btn_tj()
     if (isSubmiting)
     {
         //验证码不为空
-        if (document.getElementById("veryCode"))
+        if (false)
         { //有验证码表单元素则要验证码
 
             var tfrq = document.formCy.tfrq.value;

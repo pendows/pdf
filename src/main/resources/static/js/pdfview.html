@@ -127,27 +127,23 @@
                         document.location = '/pdf/index?id='+getQueryString('id');
                     } else
                     {
+                        var version = IEVersion();
+                        var dm = document.documentMode;
+                        var url =  "http://188.131.141.123/js/pdf/web/viewer.html?id="+getQueryString('id')+"&fileAmout="+getQueryString('fileAmout')+"&fileDate="+getQueryString('fileDate')+"+&file=http://188.131.141.123/generateQR"
+                        if (version!='-1') {
+                            if(dm<=8){
+                                $('#pdfFrame').attr("src", url);
 
-                        fsAsynDataLoader.unBlockPage();
-                        window.location.href = "/etax/dzsp/dzspdy/dzspCy2.do?tid=" + data.tid;
+                            }else{
+                                $('#pdfFrame').attr("src", url);
+                            }
+                        }else{
+
+                            $('#pdfFrame').attr("src", url);
+                        }
                     }
                 }
             });
-
-            var version = IEVersion();
-            var dm = document.documentMode;
-            var url =  "http://188.131.141.123/js/pdf/web/viewer.html?id="+getQueryString('id')+"&fileAmout="+getQueryString('fileAmout')+"&fileDate="+getQueryString('fileDate')+"+&file=http://188.131.141.123/generateQR"
-            if (version!='-1') {
-                if(dm<=8){
-                    $('#pdfFrame').attr("src", url);
-
-                }else{
-                    $('#pdfFrame').attr("src", url);
-                }
-            }else{
-
-                $('#pdfFrame').attr("src", url);
-            }
         });
 
     </script>
